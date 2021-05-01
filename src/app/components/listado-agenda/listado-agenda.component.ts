@@ -26,7 +26,7 @@ export class ListadoAgendaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.obtenerContactos();
+    this.obtenerContactos();
   }
   obtenerContactos(){
     this._contactoServicio.getContactos().subscribe(data=>{
@@ -50,5 +50,15 @@ export class ListadoAgendaComponent implements OnInit {
     }else{
       this.encontrado=true;
     }
+  }
+  //elimi
+  eliminarContacto(id:any){
+    this._contactoServicio.eliminarContacto(id).subscribe(data=>{
+      this.toastr.error(`El contacto fue eliminado con exito` ,"Contacto Eliminado!");
+      this.obtenerContactos();
+    },error=>{
+      console.log(error);
+    });
+    
   }
 }
