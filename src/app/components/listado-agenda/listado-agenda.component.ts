@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Contacto } from 'src/app/models/contacto';
+import { ContactoService } from '../../services/contacto.service';
 
 @Component({
   selector: 'app-listado-agenda',
@@ -8,10 +10,13 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./listado-agenda.component.css']
 })
 export class ListadoAgendaComponent implements OnInit {
+  listaContactos:Contacto[]=[];
+  encontrado=false;
   busquedaForm:FormGroup;
   id:string|null;
 
   constructor(
+    private _contactoServicio:ContactoService,
     private fb:FormBuilder,
     private toastr: ToastrService
   ) {
@@ -21,9 +26,21 @@ export class ListadoAgendaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    //this.obtenerContactos();
+  }
+  obtenerContactos(){
+    this._contactoServicio.getContactos().subscribe(data=>{
+      this.listaContactos=data;
+    },error=>{
+      console.log(error);
+    });
   }
   buscandoContacto(){
-    console.log("Oye imbecil revisa");
+    let dato=this.busquedaForm.get('busqueda')?.value;
+    if(dato=="8565203"){
+      this.encontrado=false;
+    }else{
+      this.encontrado=true;
+    }
   }
 }
