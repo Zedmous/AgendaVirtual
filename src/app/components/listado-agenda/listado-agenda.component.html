@@ -6,20 +6,19 @@
                     <span class="titulo">Contactos</span>
                     
                     <div class="col-auto mt-3">
-                      <form class="mt-3">
+                      <form class="mt-3" [formGroup]="busquedaForm" >
                         <div class="col-auto float-center">
                           <div class="input-group">
                             <span class="input-group-btn">
                               <i class="fas fa-user-plus btn-lg " routerLink="/crear-contacto"></i>
-                              
                             </span>
-                            <input type="text" class="form-control form-control-lg float-end" placeholder="Search for...">
-                            <i class="fas fa-search btn-lg text-dark"></i>
+                            <input formControlName="busqueda" type="text" class="form-control form-control-lg float-end" placeholder="Search for...">
+                            <button [disabled]="busquedaForm.invalid" type="button" class="btn btn-dark btn-lg float-end">Buscar</button>
+                            <i class="fas fa-search btn-lg text-dark busqueda"></i>
                           </div>
                         </div>
                       </form>
                     </div>
-                    
                     
                     <table  class="table table-secondary table-hover mt-5">
                         <thead>

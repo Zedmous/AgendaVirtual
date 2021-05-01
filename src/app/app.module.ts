@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+//componentes
 import { AppComponent } from './app.component';
 import { ListadoAgendaComponent } from './components/listado-agenda/listado-agenda.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +18,10 @@ import { ContactoComponent } from './components/contacto/contacto.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

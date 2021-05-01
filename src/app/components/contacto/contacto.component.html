@@ -4,26 +4,28 @@
             <div class="card">
                 <div class="card-body text-center">
                     <span class="titulo">Contacto</span>
-                    <form class="mt-3">
+                    <form class="mt-3" [formGroup]="contactoForm" (ngSubmit)="agregarContacto()" >
                         <div class="mb-3">
                             <input formControlName="nombre" type="text" class="form-control form-control-lg" placeholder="Nombre">
-                            <div class="text-danger">
+                            <div class="text-danger" *ngIf="contactoForm.get('nombre').hasError('required') && contactoForm.get('nombre').touched" >
                                 <span>Debe ingrresar un nombre <strong>es esencial</strong></span>
                             </div>
                         </div>
                         <div class="mb-3">
                             <input formControlName="apellido" type="text" class="form-control form-control-lg" placeholder="Apellido">
-                            
+                            <div class="text-danger" *ngIf="contactoForm.get('apellido').hasError('required') && contactoForm.get('apellido').touched" >
+                                <span>Debe ingresar un apellido <strong>es esencial</strong></span>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <input formControlName="telefono" type="number" class="form-control form-control-lg" placeholder="Tel&eacute;fono">
-                            <div class="text-danger">
+                            <div class="text-danger" *ngIf="contactoForm.get('telefono').hasError('required') && contactoForm.get('telefono').touched" >
                                 <span>Debe ingresar un tel&eacute;fono <strong>es esencial</strong></span>
                             </div>
                         </div>
                         <div class="mb-3">
                             <button routerLink="/" class="btn btn-dark btn-lg float-start">VOLVER</button>
-                            <button routerLink="/" type="btn" class="btn btn-dark btn-lg float-end">GUARDAR</button>
+                            <button [disabled]="contactoForm.invalid" type="submit" class="btn btn-dark btn-lg float-end">GUARDAR</button>
                         </div>
                     </form>
                 </div>
