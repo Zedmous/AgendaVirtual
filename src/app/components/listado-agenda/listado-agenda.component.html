@@ -3,7 +3,7 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="card">
                 <div class="card-body text-center">
-                    <span class="titulo">Contactos</span>
+                    <span class="titulo">AGENDA VIRTUAL</span>
                     
                     <div class="col-auto mt-3">
                       <form class="mt-3" [formGroup]="busquedaForm" >
@@ -12,7 +12,7 @@
                             <span class="input-group-btn">
                               <i class="fas fa-user-plus btn-lg " routerLink="/crear-contacto"></i>
                             </span>
-                            <input formControlName="busqueda" type="text" class="form-control form-control-lg float-end" placeholder="Search for...">
+                            <input formControlName="busqueda" type="number" class="form-control form-control-lg float-end" placeholder="Ingrese ID para buscar">
                             <button [disabled]="busquedaForm.invalid" type="button" (click)="buscandoContacto()"  class="btn btn-dark btn-lg float-end">Buscar</button>
                             <i class="fas fa-search btn-lg text-dark busqueda"></i>
                           </div>
@@ -23,7 +23,7 @@
                     <table  class="table table-secondary table-hover mt-5">
                         <thead>
                           <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Id</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellido</th>
                             <th scope="col">Tel&eacute;fono</th>
@@ -43,8 +43,7 @@
                           </tr>
                         </tbody>
                       </table>
-                      <h5 style="text-align: start; margin-top: 10px;" *ngIf="listaContactos.length==0">No hay contactos que mostrar</h5>
-                      <h5 style="text-align: start; margin-top: 10px;" *ngIf="encontrado==true">No se encuentra el contacto</h5>
+                      <h5 style="text-align: start; margin-top: 10px;" *ngIf="listaContactos.length==0 ">No hay contactos que mostrar</h5>
                 </div>
             </div>
         </div>

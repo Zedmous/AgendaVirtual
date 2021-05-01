@@ -10,7 +10,7 @@ import { Contacto } from '../../models/contacto';
   styleUrls: ['./contacto.component.css']
 })
 export class ContactoComponent implements OnInit {
-  
+  titulo="Registrando Contacto";
   contactoForm:FormGroup;
   id:string|null;
   constructor(
@@ -64,6 +64,7 @@ export class ContactoComponent implements OnInit {
   }
   esEditar(){
     if(this.id!==null){//este metodo servira para cargar los datos del contacto que editaremos
+      this.titulo="Editando Contacto";
       this._contactoService.consultarContacto(this.id).subscribe(data=>{
         this.contactoForm.setValue({
           nombre:data.nombre,

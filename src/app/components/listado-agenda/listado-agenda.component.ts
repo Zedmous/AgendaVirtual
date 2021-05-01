@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Contacto } from 'src/app/models/contacto';
 import { ContactoService } from '../../services/contacto.service';
@@ -18,7 +19,8 @@ export class ListadoAgendaComponent implements OnInit {
   constructor(
     private _contactoServicio:ContactoService,
     private fb:FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router:Router
   ) {
     this.busquedaForm=this.fb.group({
       busqueda:['',Validators.required]
@@ -35,21 +37,32 @@ export class ListadoAgendaComponent implements OnInit {
       console.log(error);
     });
   }
+  //metodo para solo buscar un contacto
   buscandoContacto(){
-    let dato=this.busquedaForm.get('busqueda')?.value;//capturo el dato de la caja de texto
-    if(dato=="8565203"){
+    const DATO=this.busquedaForm.get('busqueda')?.value;//capturo el dato de la caja de texto
+    this._contactoServicio.consultarContacto(DATO).subscribe(data=>{
+      console.log("DATOS DE LA API",data);
+      if(DATO==data.id){
+        this.listaContactos=data;
+        this.toastr.success(`El contacto de ID:${DATO} ha sido encontrado` ,"Contacto Encontrado!");
+        this.router.navigate(['/editar-contacto',data.id]);
+        //this.obtenerContactos();
+        this.encontrado=true;
+      }else if(data.status== 404){
+        this.toastr.error(`El contacto de ID:${DATO} no ha sido encontrado` ,"Contacto no Encontrado!");
+        
+      }
+    },error=>{
+      //console.log(error);
       this.encontrado=false;
-      let data={
-        _id:1,
-        nombre:"Eduardo",
-        apellido:"Nieves",
-        telefono:"04160534987"
-      };
-      this.listaContactos.push(data);
+      if(!this.encontrado){
+        this.toastr.error(`El contacto de ID:${DATO} no ha sido encontrado` ,"Contacto no Encontrado!");
+        this.busquedaForm.setValue({
+          busqueda:null
+        });
+      }
+    });
 
-    }else{
-      this.encontrado=true;
-    }
   }
   //elimi
   eliminarContacto(id:any){
