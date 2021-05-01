@@ -36,9 +36,17 @@ export class ListadoAgendaComponent implements OnInit {
     });
   }
   buscandoContacto(){
-    let dato=this.busquedaForm.get('busqueda')?.value;
+    let dato=this.busquedaForm.get('busqueda')?.value;//capturo el dato de la caja de texto
     if(dato=="8565203"){
       this.encontrado=false;
+      let data={
+        _id:1,
+        nombre:"Eduardo",
+        apellido:"Nieves",
+        telefono:"04160534987"
+      };
+      this.listaContactos.push(data);
+
     }else{
       this.encontrado=true;
     }

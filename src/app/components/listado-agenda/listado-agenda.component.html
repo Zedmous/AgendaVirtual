@@ -37,11 +37,10 @@
                             <td>{{contacto.apellido}}</td>
                             <td>{{contacto.telefono}}</td>
                             <td>
-                              <i  class="far fa-edit text-primary"></i>
-                              <i  class="far fa-trash-alt text-danger"></i>
+                              <i [routerLink]="['editar-contacto/',contacto._id]" class="far fa-edit text-primary"></i>
+                              <i (click)="eliminarContacto(contacto._id)" class="far fa-trash-alt text-danger"></i>
                             </td>
                           </tr>
-                          
                         </tbody>
                       </table>
                       <h5 style="text-align: start; margin-top: 10px;" *ngIf="listaContactos.length==0">No hay contactos que mostrar</h5>
